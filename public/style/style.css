@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monserrat;
+} /* Inico de barra de navegacion */
+.nav__container {
+  width: 100%;
+  height: 40%;
+  padding: 20px;
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+} /* Fin Barra de navegacion */
+
+/* Inicio de Logo con imagen */
+.nav__image {
+  background: url(../image/pelicula.png) no-repeat center center/ cover;
+  width: 50px;
+  height: 50px;
+}
+/* Inicio de menu hamburguesa */
+.contenedor {
+  width: 30px;
+}
+.burger {
+  display: block;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.linea {
+  display: block;
+  width: 30px;
+  height: 5px;
+  margin: 5px auto;
+
+  transition: all 0.5s ease-in-out;
+  background-color: #ffffff;
+}
+
+.burger.open .linea:nth-child(1) {
+  transform: translateY(10px) rotate(50deg);
+}
+.burger.open .linea:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open .linea:nth-child(3) {
+  transform: translateY(-10px) rotate(-50deg);
+}
+/* Fin de menu hamburguesa */
