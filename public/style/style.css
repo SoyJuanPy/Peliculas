@@ -3,14 +3,18 @@
   padding: 0;
   box-sizing: border-box;
   font-family: monserrat;
+  color: #fff;
 } /* Inico de barra de navegacion */
 .nav__container {
   width: 100%;
-  height: 40%;
+  height: 10vh;
   padding: 20px;
   background-color: #000;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #fff; /* Borde inferior blanco */
+  box-shadow: 0 10px 10px -8px rgba(255, 255, 255, 0.8);
 } /* Fin Barra de navegacion */
 
 /* Inicio de Logo con imagen */
@@ -18,13 +22,14 @@
   background: url(../image/pelicula.png) no-repeat center center/ cover;
   width: 50px;
   height: 50px;
-}
+} /* Fin de logo con imagen */
+
 /* Inicio de menu hamburguesa */
 .contenedor {
   width: 30px;
 }
 .burger {
-  display: block;
+  display: none;
   cursor: pointer;
   margin-top: 12px;
 }
@@ -35,7 +40,7 @@
   height: 5px;
   margin: 5px auto;
 
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background-color: #ffffff;
 }
 
@@ -50,3 +55,79 @@
   transform: translateY(-10px) rotate(-50deg);
 }
 /* Fin de menu hamburguesa */
+
+/* Inicio de menu interno*/
+.menu__links {
+  height: 100%;
+  transition: transform 0.5s;
+  display: flex;
+}
+
+.menu__item {
+  list-style: none;
+  position: relative;
+  height: 100%;
+  --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+  --transform: rotate(-90deg);
+}
+
+.menu__item:hover {
+  --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  --transform: rotate(0);
+}
+
+.menu__link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 30px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.menu__link:hover {
+  color: #aaa;
+}
+
+/* Inicion de media queris */
+@media (max-width: 800px) {
+  .burger {
+    display: block;
+  }
+
+  .menu__item {
+    --clip: 0;
+    overflow: hidden;
+  }
+
+  .menu__links {
+    position: fixed;
+    max-width: 400px;
+    width: 100%;
+    top: 70px;
+    bottom: 0;
+    right: 0;
+    background-color: #000;
+    overflow-y: auto;
+    display: grid;
+    grid-auto-rows: max-content;
+    transform: translateX(100%);
+  }
+
+  .menu__links--show {
+    transform: unset;
+    width: 100%;
+  }
+
+  .menu__link {
+    padding: 25px 0;
+    padding-left: 30px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .menu__link:hover {
+    color: #aaa;
+  }
+}
+/* Fin de medias queris */
