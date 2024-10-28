@@ -2,18 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.js", // Ruta a tu archivo de servidor
-      "use": "@vercel/node" // Usar el entorno de Node.js
+      "src": "server/index.js", 
+      "use": "@vercel/node" 
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)", // Redirige todas las peticiones que comienzan con /api
-      "dest": "/server/index.js" // A tu archivo de servidor
+      "src": "/api/(.*)", 
+      "dest": "/server/index.js" 
     },
     {
-      "src": "/(.*)", // Redirige todas las demás peticiones
-      "dest": "/public/$1" // A tu carpeta pública
+      "src": "/(.*)", 
+      "dest": "/public/$1" 
     }
   ]
 }
