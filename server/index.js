@@ -1,33 +1,34 @@
 const express = require("express");
-const axios = require("axios");
 const path = require("path");
 const app = express();
 
+// Middleware para servir archivos estáticos en la carpeta "public"
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
   try {
-    const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/popular",
-      {
-        params: {
-          api_key: "ed580b25b58102be44c94151cda257c0", // Cambia esto por tu API key
-          page: 1,
-        },
-      }
+    // Hacer la solicitud a la API de películas usando fetch
+    const response = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=ed580b25b58102be44c94151cda257c0&page=1"
     );
-    const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
+
+    // Verificar si la respuesta fue exitosa
+    if (!response.ok) {
+      throw new Error("Error en la respuesta de la API");
+    }
+
+    const data = await response.json();
+    const movies = data.results.slice(2, 50); // Obtener las primeras 50 películas
     res.json(movies);
   } catch (error) {
-    console.error("Error al conectar con la API de películas:", error);
     res
       .status(500)
       .json({ error: "Hubo un problema al conectar con la API de películas" });
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
