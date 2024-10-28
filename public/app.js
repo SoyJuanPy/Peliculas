@@ -5,7 +5,6 @@ function toggleMenu() {
   list.classList.toggle("menu__links--show");
 }
 
-// Verifica el contenedor de películas
 const moviesContainer = document.getElementById("movies-container");
 if (!moviesContainer) {
   console.error("El contenedor de películas no se encontró.");
@@ -20,7 +19,7 @@ if (!moviesContainer) {
     .then((movies) => {
       if (!movies || movies.length === 0) {
         console.error("No se encontraron películas en la respuesta.");
-        return; // Salimos si no hay películas
+        return;
       }
 
       movies.forEach((movie) => {

@@ -3,9 +3,8 @@ const path = require("path");
 
 const app = express();
 
-// Middleware para permitir CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Permitir todas las solicitudes
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -13,10 +12,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware para servir archivos estáticos en la carpeta "public"
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await fetch(
@@ -28,7 +25,7 @@ app.get("/api/movies", async (req, res) => {
     }
 
     const data = await response.json();
-    const movies = data.results.slice(0, 50); // Obtener las primeras 50 películas
+    const movies = data.results.slice(2, 50);
     res.json(movies);
   } catch (error) {
     res
@@ -37,7 +34,7 @@ app.get("/api/movies", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000; // Usa el puerto de Vercel o 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
