@@ -12,7 +12,7 @@ app.get("/api/movies", async (req, res) => {
       "https://api.themoviedb.org/3/movie/popular",
       {
         params: {
-          api_key: "ed580b25b58102be44c94151cda257c0",
+          api_key: "ed580b25b58102be44c94151cda257c0", // Usa tu API key
           page: 1,
         },
       }
@@ -27,7 +27,8 @@ app.get("/api/movies", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000; // Usa el puerto de producción si está disponible
+// Escucha en el puerto definido por Vercel
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
+  console.log(`Servidor en ejecución en el puerto ${PORT}`);
 });
