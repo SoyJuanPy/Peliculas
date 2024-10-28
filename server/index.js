@@ -3,32 +3,41 @@ const axios = require("axios");
 const path = require("path");
 const app = express();
 
-// Sirve archivos estáticos de la carpeta public
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Ruta para consumir la API de TMDB
+// Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21",
+      "https://api.themoviedb.org/3/movie/popular",
       {
         params: {
-          api_key: "ed580b25b58102be44c94151cda257c0", // Cambia esto por tu API key
+          api_key: "ed580b25b58102be44c94151cda257c0",
           page: 1,
         },
       }
     );
-    const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
-    res.json(movies);
+
+    console.log(response.data); // Para verificar la estructura de la respuesta en la consola
+
+    // Asegúrate de que 'results' exista antes de usar 'slice'
+    const movies = response.data.results
+      ? response.data.results.slice(0, 50)
+      : [];
+    if (!movies.length) {
+      console.error("No se encontraron películas en la respuesta.");
+    }
+
+    res.json(movies); // Enviar las películas como respuesta
   } catch (error) {
     console.error("Error al conectar con la API de películas:", error);
     res
       .status(500)
-      .json({ error: "Error al conectar con la API de películas" });
+      .json({ error: "Hubo un problema al conectar con la API de películas" });
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
