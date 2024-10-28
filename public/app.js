@@ -5,7 +5,7 @@ function toggleMenu() {
 
   list.classList.toggle("menu__links--show");
 }
-fetch("https://peliculas-6qq68vfyb-juampys-projects.vercel.app/")
+fetch("https://api.themoviedb.org/3/movie/popular")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Error en la respuesta de la API");
