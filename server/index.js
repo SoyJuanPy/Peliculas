@@ -1,10 +1,18 @@
 const express = require("express");
 const path = require("path");
+const fetch = require("node-fetch");
 
 const app = express();
 
 // Middleware para servir archivos estáticos en la carpeta "public"
 app.use(express.static(path.join(__dirname, "../public")));
+
+// Middleware para permitir CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Permitir todas las solicitudes
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
@@ -13,18 +21,15 @@ app.get("/api/movies", async (req, res) => {
       "https://api.themoviedb.org/3/movie/popular?api_key=ed580b25b58102be44c94151cda257c0"
     );
 
-    // Verificar si la respuesta fue exitosa
     if (!response.ok) {
       throw new Error("Error en la respuesta de la API");
     }
 
     const data = await response.json();
-    const movies = data.results.slice(0, 50); // Obtener las primeras 50 películas
+    const movies = data.results.slice(0, 50);
     res.json(movies);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Hubo un problema al conectar con la API de películas" });
+    res.status(500).json({ error: "Hubo un problema al conectar con la API de películas" });
   }
 });
 
