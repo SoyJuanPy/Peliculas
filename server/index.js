@@ -25,11 +25,9 @@ app.get(
       res.json(movies);
     } catch (error) {
       console.error("Error al conectar con la API de películas:", error);
-      res
-        .status(500)
-        .json({
-          error: "Hubo un problema al conectar con la API de películas",
-        });
+      res.status(500).json({
+        error: "Hubo un problema al conectar con la API de películas",
+      });
     }
   }
 );
