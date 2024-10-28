@@ -5,39 +5,27 @@ function toggleMenu() {
 
   list.classList.toggle("menu__links--show");
 }
-/* peli */
-const API_KEY = "ed580b25b58102be44c94151cda257c0";
-const MOVIE_API_URL =
-  "https://api.themoviedb.org/3/movie/popular?api_key=" +
-  API_KEY +
-  "&language=en-US&page=1";
-
-async function fetchMovies() {
-  try {
-    const response = await fetch(MOVIE_API_URL);
+fetch("/api/movies")
+  .then((response) => {
     if (!response.ok) {
-      throw new Error("Error fetching movies: " + response.status);
+      throw new Error("Network response was not ok");
     }
-    const data = await response.json();
-    displayMovies(data.results);
-  } catch (error) {
-    console.error(error);
-  }
-}
+    return response.json();
+  })
+  .then((movies) => {
+    const moviesContainer = document.getElementById("movies-container");
 
-function displayMovies(movies) {
-  const moviesContainer = document.getElementById("movies-container");
-  moviesContainer.innerHTML = "";
-  movies.forEach((movie) => {
-    const movieElement = document.createElement("div");
-    movieElement.className = "movie";
-    movieElement.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        
-          
-        `;
-    moviesContainer.appendChild(movieElement);
-  });
-}
-
-fetchMovies();
+    movies.forEach((movie) => {
+      const movieDiv = document.createElement("div");
+      movieDiv.classList.add("movie-card");
+      movieDiv.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+              
+            `;
+      movieDiv.addEventListener("click", () => {
+        window.location.href = `links/info.html?id=${movie.id}`;
+      });
+      moviesContainer.appendChild(movieDiv);
+    });
+  })
+  .catch((error) => console.error("Error al obtener películas:", error));

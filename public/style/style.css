@@ -120,27 +120,32 @@
 .active {
   color: #aaa;
 }
+.fondo {
+  background-color: #333;
+}
 
 /* PElicula */
-#movies-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.movie {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
+.movie-card {
+  margin: 10px;
+  width: 200px; /* Ajusta el tamaño según sea necesario */
   text-align: center;
+  transition: all 0.5 ease-in;
 }
 
-.movie img {
-  width: 100%;
-  height: auto;
+.movie-card:hover {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  transform: translateX(180deg);
 }
-.movie:hover {
-  border: 3px solid #000;
+.movie-card img {
+  width: 100%; /* Hace que la imagen sea responsiva */
+  border-radius: 8px;
 }
 
 /* Inicion de media queris */
