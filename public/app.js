@@ -24,12 +24,6 @@ if (!moviesContainer) {
       }
 
       movies.forEach((movie) => {
-        // Verificación de datos de cada película
-        if (!movie.poster_path || !movie.title) {
-          console.warn("Película sin imagen o título:", movie);
-          return;
-        }
-
         const movieDiv = document.createElement("div");
         movieDiv.classList.add("movie-card");
         movieDiv.innerHTML = `
