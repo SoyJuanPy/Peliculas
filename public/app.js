@@ -5,7 +5,7 @@ function toggleMenu() {
 
   list.classList.toggle("menu__links--show");
 }
-fetch("/api/movies")
+fetch("https://peliculas-murex.vercel.app/api/movies")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Error en la respuesta de la API");
