@@ -1,0 +1,65 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.contenedor__busqueda {
+  margin: 20px auto;
+}
+
+.busqueda {
+  padding: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-movie {
+  padding: 10px;
+  border: none;
+  background-color: #ff4757;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-movie:hover {
+  background-color: #ff6b81;
+}
+
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.movie-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.movie-card img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
