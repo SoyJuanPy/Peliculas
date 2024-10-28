@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/popular",
+      "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21",
       {
         params: {
           api_key: "ed580b25b58102be44c94151cda257c0", // Cambia esto por tu API key
