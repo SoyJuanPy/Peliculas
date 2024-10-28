@@ -23,7 +23,7 @@ fetch("https://peliculas-murex.vercel.app/api/movies")
               
             `;
       movieDiv.addEventListener("click", () => {
-        window.location.href = `links/info.html?id=${movie.id}`;
+        window.location.href = `/links/info.html?id=${movie.id}`;
       });
       moviesContainer.appendChild(movieDiv);
     });
