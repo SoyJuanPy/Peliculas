@@ -4,16 +4,13 @@ function toggleMenu() {
   const list = document.querySelector(".menu__links");
   list.classList.toggle("menu__links--show");
 }
-// Usa la URL completa de la API según el entorno
 
 // Verifica el contenedor de películas
 const moviesContainer = document.getElementById("movies-container");
 if (!moviesContainer) {
   console.error("El contenedor de películas no se encontró.");
 } else {
-  fetch(
-    "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21"
-  )
+  fetch("/api/movies")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error en la respuesta de la API");
@@ -27,6 +24,12 @@ if (!moviesContainer) {
       }
 
       movies.forEach((movie) => {
+        // Verificación de datos de cada película
+        if (!movie.poster_path || !movie.title) {
+          console.warn("Película sin imagen o título:", movie);
+          return;
+        }
+
         const movieDiv = document.createElement("div");
         movieDiv.classList.add("movie-card");
         movieDiv.innerHTML = `

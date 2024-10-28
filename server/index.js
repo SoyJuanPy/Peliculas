@@ -10,7 +10,7 @@ app.get("/api/movies", async (req, res) => {
   try {
     // Hacer la solicitud a la API de películas usando fetch
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=ed580b25b58102be44c94151cda257c0&page=2"
+      "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21"
     );
 
     // Verificar si la respuesta fue exitosa
@@ -19,16 +19,18 @@ app.get("/api/movies", async (req, res) => {
     }
 
     const data = await response.json();
-    const movies = data.results.slice(2, 50); // Obtener las primeras 50 películas
+    const movies = data.results ? data.results.slice(0, 50) : []; // Obtener las primeras 50 películas
     res.json(movies);
   } catch (error) {
+    console.error("Error al conectar con la API de películas:", error);
     res
       .status(500)
       .json({ error: "Hubo un problema al conectar con la API de películas" });
   }
 });
 
-const PORT = 3000;
+// Configuración del puerto
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
