@@ -8,7 +8,7 @@ function toggleMenu() {
 fetch("/api/movies")
   .then((response) => {
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error("Error en la respuesta de la API");
     }
     return response.json();
   })

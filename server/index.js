@@ -3,9 +3,9 @@ const axios = require("axios");
 const path = require("path");
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../public"))); // Asegúrate de que esta ruta sea correcta
+app.use(express.static(path.join(__dirname, "../public"))); // Sirve archivos estáticos desde la carpeta public
 
-// Ruta para consumir la API de Magic Loops
+// Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await axios.get(
@@ -17,17 +17,17 @@ app.get("/api/movies", async (req, res) => {
         },
       }
     );
-    const movies = response.data.results.slice(0, 50); // Obtener solo las primeras 50 películas
+    const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
     res.json(movies);
   } catch (error) {
-    console.error(error);
+    console.error(error); // Imprimir el error en la consola del servidor
     res
       .status(500)
       .json({ error: "Hubo un problema al conectar con la API de películas" });
   }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Usa el puerto de producción si está disponible
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
