@@ -20,7 +20,7 @@ app.get("/api/movies", async (req, res) => {
     const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
     res.json(movies);
   } catch (error) {
-    console.error(error); // Imprimir el error en la consola del servidor
+    console.error(error);
     res
       .status(500)
       .json({ error: "Hubo un problema al conectar con la API de películas" });
