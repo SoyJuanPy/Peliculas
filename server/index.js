@@ -1,8 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
-
 const app = express();
+
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Ruta para consumir la API de Magic Loops
@@ -17,10 +17,9 @@ app.get("/api/movies", async (req, res) => {
         },
       }
     );
-    const movies = response.data.results; // Aquí estás obteniendo las películas
+    const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
     res.json(movies);
   } catch (error) {
-    console.error("Error al conectar con la API de películas:", error);
     res
       .status(500)
       .json({ error: "Hubo un problema al conectar con la API de películas" });

@@ -1,37 +1,27 @@
-function toggleMenu() {
-  let burger = document.querySelector(".burger");
-  burger.classList.toggle("open");
-  const list = document.querySelector(".menu__links");
 
-  list.classList.toggle("menu__links--show");
-}
+const params = new URLSearchParams(window.location.search);
+const movieId = params.get("id");
 
-// Usa la URL completa de la API según el entorno
-const baseUrl = window.location.origin; // Obtiene el origen de la URL actual
-fetch(`${baseUrl}/api/movies`)
+
+fetch(
+  `https://api.themoviedb.org/3/movie/${movieId}?api_key=ed580b25b58102be44c94151cda257c0`
+)
   .then((response) => {
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error("Network response was not ok");
     }
     return response.json();
   })
-  .then((movies) => {
-    if (!movies || movies.length === 0) {
-      console.error("No se encontraron películas en la respuesta.");
-      return;
-    }
-
-    const moviesContainer = document.getElementById("movies-container");
-    movies.forEach((movie) => {
-      const movieDiv = document.createElement("div");
-      movieDiv.classList.add("movie-card");
-      movieDiv.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-      `;
-      movieDiv.addEventListener("click", () => {
-        window.location.href = `/links/info.html?id=${movie.id}`;
-      });
-      moviesContainer.appendChild(movieDiv);
-    });
+  .then((movie) => {
+    const movieDetailsContainer = document.getElementById("movie-details");
+    movieDetailsContainer.innerHTML = `
+            <h1>${movie.title}</h1>
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <p>${movie.overview}</p>
+            <p><strong>Fecha de lanzamiento:</strong> ${movie.release_date}</p>
+            <p><strong>Calificación:</strong> ${movie.vote_average}</p>
+        `;
   })
-  .catch((error) => console.error("Error al obtener películas:", error));
+  .catch((error) =>
+    console.error("Error al obtener detalles de la película:", error)
+  );
