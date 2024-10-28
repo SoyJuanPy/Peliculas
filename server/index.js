@@ -1,32 +1,16 @@
-const express = require("express");
-const axios = require("axios");
-const path = require("path");
-const app = express();
-
-app.use(express.static(path.join(__dirname, "../public")));
-
-// Ruta para consumir la API de Magic Loops
-app.get("/api/movies", async (req, res) => {
-  try {
-    const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/popular",
-      {
-        params: {
-          api_key: "ed580b25b58102be44c94151cda257c0",
-          page: 1,
-        },
-      }
-    );
-    const movies = response.data.results.slice(0, 50); // Obtener las primeras 50 películas
-    res.json(movies);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Hubo un problema al conectar con la API de películas" });
-  }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
-});
+fetch("/api/movies")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Error en la respuesta de la API: " + response.statusText);
+        }
+        return response.json();
+    })
+    .then(movies => {
+        // Manejo de la lista de películas
+        console.log(movies);
+        // Aquí puedes agregar la lógica para mostrar las películas en tu interfaz
+    })
+    .catch(error => {
+        console.error("Error al obtener películas:", error);
+        // Aquí puedes mostrar un mensaje en la interfaz para el usuario
+    });
