@@ -10,7 +10,7 @@ const moviesContainer = document.getElementById("movies-container");
 if (!moviesContainer) {
   console.error("El contenedor de películas no se encontró.");
 } else {
-  fetch("https://peliculas-git-main-juampys-projects.vercel.app/api/movies")
+  fetch("/api/movies")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error en la respuesta de la API");
