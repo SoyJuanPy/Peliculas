@@ -1,14 +1,19 @@
-// Código para la barra de navegación o menú, si lo tienes
 function toggleMenu() {
   let burger = document.querySelector(".burger");
   burger.classList.toggle("open");
   const list = document.querySelector(".menu__links");
+
   list.classList.toggle("menu__links--show");
 }
-fetch("/api/movies")
+
+// Usa la URL completa de la API según el entorno
+const baseUrl = window.location.origin; // Obtiene el origen de la URL actual
+
+fetch(`${baseUrl}/api/movies`)
   .then((response) => {
     if (!response.ok) {
-      throw new Error("Error en la respuesta de la API");
+      console.error(`HTTP error! status: ${response.status}`);
+      return response.text(); // Cambia a text() para ver el contenido de la respuesta
     }
     return response.json();
   })
@@ -16,7 +21,7 @@ fetch("/api/movies")
     const moviesContainer = document.getElementById("movies-container");
 
     if (!movies || movies.length === 0) {
-      console.log("No se encontraron películas.");
+      console.error("No se encontraron películas en la respuesta.");
       return;
     }
 
@@ -24,11 +29,10 @@ fetch("/api/movies")
       const movieDiv = document.createElement("div");
       movieDiv.classList.add("movie-card");
       movieDiv.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        <h3>${movie.title}</h3>
-      `;
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            `;
       movieDiv.addEventListener("click", () => {
-        window.location.href = `links/info.html?id=${movie.id}`;
+        window.location.href = `/links/info.html?id=${movie.id}`;
       });
       moviesContainer.appendChild(movieDiv);
     });
