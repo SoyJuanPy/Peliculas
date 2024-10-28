@@ -5,11 +5,10 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Ruta para consumir la API de películas
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/popular",
+      "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21",
       {
         params: {
           api_key: "ed580b25b58102be44c94151cda257c0",
@@ -18,9 +17,7 @@ app.get("/api/movies", async (req, res) => {
       }
     );
 
-    console.log(response.data); // Para verificar la estructura de la respuesta en la consola
-
-    // Asegúrate de que 'results' exista antes de usar 'slice'
+    console.log(response.data);
     const movies = response.data.results
       ? response.data.results.slice(0, 50)
       : [];
@@ -28,7 +25,7 @@ app.get("/api/movies", async (req, res) => {
       console.error("No se encontraron películas en la respuesta.");
     }
 
-    res.json(movies); // Enviar las películas como respuesta
+    res.json(movies);
   } catch (error) {
     console.error("Error al conectar con la API de películas:", error);
     res
