@@ -11,7 +11,9 @@ const moviesContainer = document.getElementById("movies-container");
 if (!moviesContainer) {
   console.error("El contenedor de películas no se encontró.");
 } else {
-  fetch("/api/movies")
+  fetch(
+    "https://magicloops.dev/api/loop/run/9b295e32-fe0f-49b8-a5d4-fda5bcbe5154?input=I+love+Magic+Loops%21"
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error en la respuesta de la API");

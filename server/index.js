@@ -10,7 +10,7 @@ app.get("/api/movies", async (req, res) => {
   try {
     // Hacer la solicitud a la API de películas usando fetch
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=ed580b25b58102be44c94151cda257c0&page=1"
+      "https://api.themoviedb.org/3/movie/popular?api_key=ed580b25b58102be44c94151cda257c0&page=2"
     );
 
     // Verificar si la respuesta fue exitosa
