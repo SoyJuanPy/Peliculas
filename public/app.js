@@ -5,14 +5,13 @@ function toggleMenu() {
   list.classList.toggle("menu__links--show");
 }
 // Usa la URL completa de la API según el entorno
-const baseUrl = window.location.origin; // Obtiene el origen de la URL actual
 
 // Verifica el contenedor de películas
 const moviesContainer = document.getElementById("movies-container");
 if (!moviesContainer) {
   console.error("El contenedor de películas no se encontró.");
 } else {
-  fetch(`${baseUrl}/api/movies`)
+  fetch("/api/movies")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error en la respuesta de la API");
