@@ -2,9 +2,9 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-// Middleware para permitir CORS
+
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Permitir todas las solicitudes
+  res.header("Access-Control-Allow-Origin", "*"); 
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -12,10 +12,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware para servir archivos estáticos en la carpeta "public"
 app.use(express.static(path.join(__dirname, "../public")));
-
-// Ruta para obtener películas populares
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await fetch(
@@ -27,7 +24,7 @@ app.get("/api/movies", async (req, res) => {
     }
 
     const data = await response.json();
-    const movies = data.results.slice(0, 50); // Obtener las primeras 50 películas
+    const movies = data.results.slice(0, 50); 
     res.json(movies);
   } catch (error) {
     res
@@ -36,9 +33,9 @@ app.get("/api/movies", async (req, res) => {
   }
 });
 
-// Ruta para buscar películas por nombre
+
 app.get("/api/search", async (req, res) => {
-  const searchQuery = req.query.query || ""; // Obtener el parámetro de búsqueda
+  const searchQuery = req.query.query || ""; 
   try {
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=ed580b25b58102be44c94151cda257c0&query=${encodeURIComponent(
@@ -51,7 +48,7 @@ app.get("/api/search", async (req, res) => {
     }
 
     const data = await response.json();
-    const movies = data.results.slice(0, 50); // Obtener las primeras 50 películas que coincidan
+    const movies = data.results.slice(0, 50); 
     res.json(movies);
   } catch (error) {
     res.status(500).json({

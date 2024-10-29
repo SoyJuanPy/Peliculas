@@ -5,14 +5,12 @@ function toggleMenu() {
   list.classList.toggle("menu__links--show");
 }
 
-// Manejar la búsqueda de películas
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 
 searchButton.addEventListener("click", () => {
-  const query = searchInput.value.trim(); // Obtener el valor de búsqueda
+  const query = searchInput.value.trim(); 
   if (query) {
-    // Redirigir a search.html con el parámetro de búsqueda
     window.location.href = `links/resultados.html?query=${encodeURIComponent(
       query
     )}`;
@@ -20,8 +18,20 @@ searchButton.addEventListener("click", () => {
     alert("Por favor, ingrese un término de búsqueda.");
   }
 });
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const query = searchInput.value.trim();
+    if (query) {
+      window.location.href = `links/resultados.html?query=${encodeURIComponent(
+        query
+      )}`;
+    } else {
+      alert("Por favor, ingrese un término de búsqueda.");
+    }
+  }
+});
 
-// Función para cargar películas
+
 const moviesContainer = document.getElementById("movies-container");
 
 if (!moviesContainer) {
