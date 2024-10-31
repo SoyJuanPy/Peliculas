@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 });
 
 // Sirve archivos estáticos desde la carpeta "public"
-app.use(express.static(path.join(__dirname, "public"))); // Cambiado "../public" a "public"
+app.use(express.static(path.join(__dirname, "../public"))); // Cambiado "../public" a "public"
 
 // Rutas de la API
 app.get("/api/movies", async (req, res) => {

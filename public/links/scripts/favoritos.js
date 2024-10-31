@@ -32,12 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const updatedFavorites = favorites.filter((movie) => movie.id !== id);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    loadFavorites(); // Recargar la lista de favoritos
+    loadFavorites(); 
   }
 
-  loadFavorites(); // Cargar favoritos al inicio
+  loadFavorites(); 
 
-  // Manejar la búsqueda desde la página de favoritos
+  
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
 
