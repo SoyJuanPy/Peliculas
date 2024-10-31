@@ -133,7 +133,7 @@
 
 .movie-card {
   margin: 10px;
-  width: 200px; /* Ajusta el tamaño según sea necesario */
+  width: 200px; 
   text-align: center;
   transition: all 0.5 ease-in;
 }
@@ -144,13 +144,13 @@
   transform: translateX(180deg);
 }
 .movie-card img {
-  width: 100%; /* Hace que la imagen sea responsiva */
+  width: 100%; 
   border-radius: 8px;
 }
 .movie-card {
   position: relative;
   display: inline-block;
-  width: 200px; /* Ajusta el ancho según tu diseño */
+  width: 200px; 
   margin: 15px;
   z-index: 1;
 }
@@ -176,7 +176,7 @@
   color: red;
 }
 
-/* Inicion de media queris */
+
 @media (max-width: 800px) {
   .burger {
     display: block;
@@ -225,4 +225,3 @@
     width: 85%;
   }
 }
-/* Fin de medias queris */

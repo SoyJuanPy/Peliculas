@@ -3,7 +3,6 @@ const path = require("path");
 
 const app = express();
 
-// Configuración de CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -13,10 +12,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Sirve archivos estáticos desde la carpeta "public"
-app.use(express.static(path.join(__dirname, "../public"))); // Cambiado "../public" a "public"
+app.use(express.static(path.join(__dirname, "../public")));
 
-// Rutas de la API
 app.get("/api/movies", async (req, res) => {
   try {
     const response = await fetch(
