@@ -147,6 +147,34 @@
   width: 100%; /* Hace que la imagen sea responsiva */
   border-radius: 8px;
 }
+.movie-card {
+  position: relative;
+  display: inline-block;
+  width: 200px; /* Ajusta el ancho según tu diseño */
+  margin: 15px;
+  z-index: 1;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.heart-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.heart-icon {
+  color: gray;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.heart-icon.red {
+  color: red;
+}
 
 /* Inicion de media queris */
 @media (max-width: 800px) {
@@ -174,6 +202,8 @@
   }
 
   .menu__links--show {
+    position: absolute;
+    z-index: 10;
     transform: unset;
     width: 100%;
   }

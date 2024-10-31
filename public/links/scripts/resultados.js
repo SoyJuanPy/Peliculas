@@ -1,41 +1,85 @@
-const queryParams = new URLSearchParams(window.location.search);
-const query = queryParams.get("query");
+document.addEventListener("DOMContentLoaded", () => {
+  const query = new URLSearchParams(window.location.search).get("query");
+  const moviesContainer = document.getElementById("movies-container");
 
-if (query) {
   fetch(`/api/search?query=${encodeURIComponent(query)}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error en la respuesta de la API de búsqueda");
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((movies) => {
-      const moviesContainer = document.getElementById("movies-container");
-      if (!moviesContainer) {
-        console.error("El contenedor de películas no se encontró.");
-        return;
-      }
+      if (movies && movies.length > 0) {
+        movies.forEach((movie) => {
+          const movieDiv = document.createElement("div");
+          movieDiv.classList.add("movie-card");
 
-      if (!movies || movies.length === 0) {
-        moviesContainer.innerHTML =
-          "<p>No se encontraron películas para la búsqueda.</p>";
-        return;
-      }
+          const isFavorite = isMovieFavorite(movie.id);
 
-      movies.forEach((movie) => {
-        const movieDiv = document.createElement("div");
-        movieDiv.classList.add("movie-card");
-        movieDiv.innerHTML = `
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-          <h3>${movie.title}</h3>
-        `;
-        movieDiv.addEventListener("click", () => {
-          window.location.href = `info.html?id=${movie.id}`;
+          movieDiv.innerHTML = `
+            <i class="bi bi-suit-heart-fill heart-icon ${
+              isFavorite ? "red" : ""
+            }" data-id="${movie.id}"></i>
+            <img src="https://image.tmdb.org/t/p/w500${
+              movie.poster_path
+            }" alt="${movie.title}">
+          `;
+
+          const heartIcon = movieDiv.querySelector(".heart-icon");
+          heartIcon.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleFavorite(movie, heartIcon);
+          });
+
+          movieDiv.addEventListener("click", () => {
+            window.location.href = `info.html?id=${movie.id}`;
+          });
+
+          moviesContainer.appendChild(movieDiv);
         });
-        moviesContainer.appendChild(movieDiv);
-      });
+      }
     })
     .catch((error) => console.error("Error al buscar películas:", error));
-} else {
-  console.error("No se proporcionó un término de búsqueda.");
+
+  const searchButton = document.getElementById("search-button");
+  const searchInput = document.getElementById("search-input");
+
+  searchButton.addEventListener("click", () => {
+    const newQuery = searchInput.value.trim();
+    if (newQuery) {
+      window.location.href = `resultados.html?query=${encodeURIComponent(
+        newQuery
+      )}`;
+    } else {
+      alert("Por favor, ingrese un término de búsqueda.");
+    }
+  });
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const newQuery = searchInput.value.trim();
+      if (newQuery) {
+        window.location.href = `resultados.html?query=${encodeURIComponent(
+          newQuery
+        )}`;
+      } else {
+        alert("Por favor, ingrese un término de búsqueda.");
+      }
+    }
+  });
+});
+
+function isMovieFavorite(movieId) {
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  return favorites.some((fav) => fav.id === movieId);
+}
+
+function toggleFavorite(movie, icon) {
+  icon.classList.toggle("red");
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const movieIndex = favorites.findIndex((fav) => fav.id === movie.id);
+
+  if (movieIndex > -1) {
+    favorites.splice(movieIndex, 1);
+  } else {
+    favorites.push(movie);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 }

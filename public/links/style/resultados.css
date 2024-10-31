@@ -12,31 +12,9 @@ header {
   text-align: center;
 }
 
-.contenedor__busqueda {
-  margin: 20px auto;
-}
-
-.busqueda {
-  padding: 10px;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.btn-movie {
-  padding: 10px;
-  border: none;
-  background-color: #ff4757;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-movie:hover {
-  background-color: #ff6b81;
-}
-
-.movies-container {
+.movies__container {
+  height: 100%;
+  background-color: #333;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -62,4 +40,35 @@ header {
 
 .movie-card:hover {
   transform: scale(1.05);
+}
+
+.movie-card {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  width: 200px;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: gray;
+  cursor: pointer;
+}
+
+.heart-icon.red {
+  color: red;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+#movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
