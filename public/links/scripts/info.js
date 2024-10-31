@@ -30,7 +30,7 @@ searchInput.addEventListener("keydown", (e) => {
   }
 });
 
-fetch(`http://localhost:3000/api/movies/${movieId}`)
+fetch(`/api/movies/${movieId}`)
   .then((response) => {
     if (!response.ok) {
       throw new Error("Error al obtener la información de la película");
