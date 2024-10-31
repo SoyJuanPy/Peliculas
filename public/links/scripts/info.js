@@ -1,7 +1,12 @@
+function toggleMenu() {
+  const burger = document.querySelector(".burger");
+  burger.classList.toggle("open");
+  const list = document.querySelector(".menu__links");
+  list.classList.toggle("menu__links--show");
+}
 const movieId = new URLSearchParams(window.location.search).get("id");
 const movieDetailsContainer = document.getElementById("movie-details");
 
-// Función para realizar la búsqueda
 function performSearch(query) {
   if (query) {
     window.location.href = `resultados.html?query=${encodeURIComponent(query)}`;
@@ -10,7 +15,6 @@ function performSearch(query) {
   }
 }
 
-// Evento para el botón de búsqueda
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 
