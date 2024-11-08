@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.stopPropagation();
         const idToRemove = parseInt(heartIcon.dataset.id);
         removeFromFavorites(idToRemove);
+        Swal.fire({ title: "Se quito de favoritos", icon: "error" });
       });
 
       favoritesContainer.appendChild(movieDiv);
@@ -32,12 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const updatedFavorites = favorites.filter((movie) => movie.id !== id);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    loadFavorites(); 
+    loadFavorites();
   }
 
-  loadFavorites(); 
+  loadFavorites();
 
-  
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
 
@@ -45,10 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = searchInput.value.trim();
     if (query) {
       window.location.href = `resultados.html?query=${encodeURIComponent(
-        query
+        query,
       )}`;
     } else {
-      alert("Por favor, ingrese un término de búsqueda.");
+      Swal.fire({
+        title: "Upps",
+        text: "Por favor, ingrese un término de búsqueda.",
+        icon: "question",
+      });
     }
   });
 
@@ -57,10 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const query = searchInput.value.trim();
       if (query) {
         window.location.href = `resultados.html?query=${encodeURIComponent(
-          query
+          query,
         )}`;
       } else {
-        alert("Por favor, ingrese un término de búsqueda.");
+        Swal.fire({
+          title: "Upps",
+          text: "Por favor, ingrese un térmno de búsqueda.",
+          icon: "question",
+        });
       }
     }
   });

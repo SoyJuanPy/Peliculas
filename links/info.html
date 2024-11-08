@@ -1,16 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/font/font.css" />
-    <link rel="stylesheet" href="style/resultados.css" />
+    <link rel="stylesheet" href="style/info.css" />
     <link rel="icon" href="../image/movies.webp" type="image/x-icon" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <title>Resultados</title>
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Detalles</title>
   </head>
   <body>
     <nav class="nav__container">
@@ -31,7 +33,8 @@
               class="busqueda"
               type="text"
               id="search-input"
-              placeholder="Buscar películas..." />
+              placeholder="Buscar películas..."
+            />
             <button class="btn-movie" id="search-button">
               <i class="bi bi-search"></i>
             </button>
@@ -43,13 +46,14 @@
         </li>
 
         <li class="menu__item">
-          <a href="favoritos.html" class="menu__link">Favoritas</a>
+          <a href="favoritos.html" class="menu__link active">Favoritas</a>
         </li>
       </ul>
     </nav>
     <div id="movie-details" class="movie__det"></div>
 
-    <main id="movies-container" class="movies__container"></main>
-    <script src="scripts/resultados.js"></script>
+    <script src="scripts/info.js"></script>
+
+    <script src="../app.js"></script>
   </body>
 </html>
