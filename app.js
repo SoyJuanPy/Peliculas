@@ -1,4 +1,5 @@
 import { fetchMovies } from "./api.js";
+
 function toggleMenu() {
   const burger = document.querySelector(".burger");
   burger.classList.toggle("open");
